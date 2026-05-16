@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { getReservations } from '../api/reservationApi'
 import type { ReservationResponse } from '../types'
+import LoadingSpinner from './LoadingSpinner'
 import StatusBadge from './StatusBadge'
 
 function ReservationTable() {
@@ -25,7 +26,7 @@ function ReservationTable() {
   }, [])
 
   if (isLoading) {
-    return <p>Loading reservations...</p>
+    return <LoadingSpinner label="Loading reservations..." />
   }
 
   if (errorMessage) {
