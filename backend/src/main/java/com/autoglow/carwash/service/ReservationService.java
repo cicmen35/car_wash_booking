@@ -12,6 +12,9 @@ import com.autoglow.carwash.dto.UpdateReservationStatusRequest;
 import com.autoglow.carwash.entity.ReservationEntity;
 import com.autoglow.carwash.entity.ReservationStatus;
 import com.autoglow.carwash.entity.ServiceEntity;
+import com.autoglow.carwash.exception.DuplicateBookingException;
+import com.autoglow.carwash.exception.InvalidReservationException;
+import com.autoglow.carwash.exception.ResourceNotFoundException;
 import com.autoglow.carwash.repository.ReservationRepository;
 import com.autoglow.carwash.repository.ServiceRepository;
 
@@ -31,7 +34,7 @@ public class ReservationService {
 	@Transactional
 	public ReservationResponse createReservation(ReservationRequest request) {
 		ServiceEntity service = serviceRepository.findById(request.getServiceId())
-				.orElseThrow(() -> new IllegalArgumentException("Service not found with id: " + request.getServiceId()));
+				.orElseThrow(() -> new ResourceNotFoundException("Service not found with id: " + request.getServiceId()));
 
 		validateReservationIsNotInPast(request);
 		validateTimeSlotIsAvailable(request);
@@ -83,7 +86,7 @@ public class ReservationService {
 				request.getReservationTime());
 
 		if (reservationDateTime.isBefore(LocalDateTime.now())) {
-			throw new IllegalArgumentException("Reservation cannot be in the past.");
+			throw new InvalidReservationException("Reservation cannot be in the past.");
 		}
 	}
 
@@ -93,13 +96,13 @@ public class ReservationService {
 				request.getReservationTime());
 
 		if (alreadyBooked) {
-			throw new IllegalStateException("Reservation time is already booked.");
+			throw new DuplicateBookingException("Reservation time is already booked.");
 		}
 	}
 
 	private ReservationEntity findReservationById(Long id) {
 		return reservationRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Reservation not found with id: " + id));
+				.orElseThrow(() -> new ResourceNotFoundException("Reservation not found with id: " + id));
 	}
 
 	private ReservationResponse toResponse(ReservationEntity reservation) {

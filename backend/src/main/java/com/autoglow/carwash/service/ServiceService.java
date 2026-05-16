@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.autoglow.carwash.dto.ServiceResponse;
 import com.autoglow.carwash.entity.ServiceEntity;
+import com.autoglow.carwash.exception.ResourceNotFoundException;
 import com.autoglow.carwash.repository.ServiceRepository;
 
 @Service
@@ -30,7 +31,7 @@ public class ServiceService {
 	@Transactional(readOnly = true)
 	public ServiceResponse getServiceById(Long id) {
 		ServiceEntity service = serviceRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Service not found with id: " + id));
+				.orElseThrow(() -> new ResourceNotFoundException("Service not found with id: " + id));
 
 		return toResponse(service);
 	}
