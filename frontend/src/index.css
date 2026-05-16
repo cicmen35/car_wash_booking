@@ -150,6 +150,29 @@ code {
   padding: 48px 32px;
 }
 
+.site-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 32px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.site-footer h2 {
+  margin-bottom: 12px;
+}
+
+.site-footer p + p {
+  margin-top: 6px;
+}
+
+.copyright {
+  grid-column: 1 / -1;
+  color: var(--text);
+  font-size: 15px;
+}
+
 @media (max-width: 720px) {
   .site-header {
     align-items: flex-start;
@@ -163,5 +186,10 @@ code {
 
   .page-shell {
     padding: 32px 20px;
+  }
+
+  .site-footer {
+    grid-template-columns: 1fr;
+    padding: 28px 20px;
   }
 }

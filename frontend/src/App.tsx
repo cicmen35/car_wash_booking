@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
+import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import AdminReservationsPage from './pages/AdminReservationsPage'
 import BookingPage from './pages/BookingPage'
@@ -23,6 +24,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </div>
+      <Footer />
     </BrowserRouter>
   )
 }
