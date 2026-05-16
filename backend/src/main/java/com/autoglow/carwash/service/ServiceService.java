@@ -37,6 +37,7 @@ public class ServiceService {
 
 	@Transactional
 	public void createDefaultServicesIfNeeded() {
+		// set example service data if database is empty
 		if (serviceRepository.count() > 0) {
 			return;
 		}
@@ -46,20 +47,32 @@ public class ServiceService {
 						null,
 						"Exterior Wash",
 						"Hand wash, wheel cleaning, and exterior drying.",
-						new BigDecimal("19.99"),
+						new BigDecimal("20.00"),
 						30),
 				new ServiceEntity(
 						null,
 						"Interior Cleaning",
 						"Vacuuming, dashboard wipe-down, window cleaning, and interior refresh.",
-						new BigDecimal("29.99"),
+						new BigDecimal("30.00"),
 						45),
 				new ServiceEntity(
 						null,
 						"Full Detailing",
 						"Complete interior and exterior cleaning with careful finishing details.",
-						new BigDecimal("79.99"),
-						120)));
+						new BigDecimal("70.00"),
+						120),
+				new ServiceEntity(
+						null,
+						"Polishing",
+						"Paint polishing to restore shine and reduce visible surface marks.",
+						new BigDecimal("100.00"),
+						180),
+				new ServiceEntity(
+						null,
+						"Premium Package",
+						"Exterior wash, interior cleaning, detailing, and polishing in one package.",
+						new BigDecimal("150.00"),
+						240)));
 	}
 
 	private ServiceResponse toResponse(ServiceEntity service) {
