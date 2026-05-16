@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { getReservations } from '../api/reservationApi'
 import type { ReservationResponse } from '../types'
+import StatusBadge from './StatusBadge'
 
 function ReservationTable() {
   const [reservations, setReservations] = useState<ReservationResponse[]>([])
@@ -62,7 +63,9 @@ function ReservationTable() {
               <td>{reservation.serviceName}</td>
               <td>{reservation.reservationDate}</td>
               <td>{reservation.reservationTime}</td>
-              <td>{reservation.status}</td>
+              <td>
+                <StatusBadge status={reservation.status} />
+              </td>
               <td>{reservation.additionalNotes || '-'}</td>
             </tr>
           ))}
