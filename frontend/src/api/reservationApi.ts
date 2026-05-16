@@ -2,7 +2,7 @@ import { apiClient } from './client'
 import type {
   ReservationRequest,
   ReservationResponse,
-  UpdateReservationStatusRequest,
+  ReservationStatus,
 } from '../types/reservation'
 
 export async function createReservation(
@@ -31,11 +31,11 @@ export async function getReservationById(
 
 export async function updateReservationStatus(
   id: number,
-  request: UpdateReservationStatusRequest,
+  status: ReservationStatus,
 ): Promise<ReservationResponse> {
   const response = await apiClient.patch<ReservationResponse>(
     `/reservations/${id}/status`,
-    request,
+    { status },
   )
   return response.data
 }
