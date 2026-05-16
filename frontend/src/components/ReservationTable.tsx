@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { getReservations } from '../api/reservationApi'
 import type { ReservationResponse } from '../types'
+import ErrorMessage from './ErrorMessage'
 import LoadingSpinner from './LoadingSpinner'
 import StatusBadge from './StatusBadge'
 
@@ -30,7 +31,7 @@ function ReservationTable() {
   }
 
   if (errorMessage) {
-    return <p className="form-message error">{errorMessage}</p>
+    return <ErrorMessage message={errorMessage} />
   }
 
   if (reservations.length === 0) {

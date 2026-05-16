@@ -257,17 +257,20 @@ code {
   grid-column: 1 / -1;
 }
 
-.form-message {
+.form-message,
+.message {
   border-radius: 6px;
   padding: 10px 12px;
 }
 
-.form-message.success {
+.form-message.success,
+.message--success {
   color: #166534;
   background: #dcfce7;
 }
 
-.form-message.error {
+.form-message.error,
+.message--error {
   color: #991b1b;
   background: #fee2e2;
 }

@@ -5,6 +5,8 @@ import { createReservation } from '../api/reservationApi'
 import { getServices } from '../api/serviceApi'
 import type { ReservationRequest } from '../types'
 import type { ServiceResponse } from '../types/service'
+import ErrorMessage from './ErrorMessage'
+import SuccessMessage from './SuccessMessage'
 
 const initialFormData = {
   customerName: '',
@@ -89,8 +91,8 @@ function ReservationForm() {
 
   return (
     <form className="reservation-form" onSubmit={handleSubmit}>
-      {successMessage && <p className="form-message success">{successMessage}</p>}
-      {errorMessage && <p className="form-message error">{errorMessage}</p>}
+      <SuccessMessage message={successMessage} />
+      <ErrorMessage message={errorMessage} />
 
       <label>
         Customer name
