@@ -29,6 +29,20 @@ export interface ReservationResponse {
   createdAt: string
 }
 
+export interface Reservation {
+  id: number
+  customerName: string
+  email: string
+  phone: string
+  carModel: string
+  serviceName: string
+  reservationDate: string
+  reservationTime: string
+  additionalNotes?: string
+  status: ReservationStatus
+  createdAt: string
+}
+
 export interface UpdateReservationStatusRequest {
   status: ReservationStatus
 }

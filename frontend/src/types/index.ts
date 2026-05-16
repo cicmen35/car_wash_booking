@@ -1,4 +1,4 @@
-export type { ServiceResponse } from './service'
+export type { Service, ServiceResponse } from './service'
 export type {
   ReservationRequest,
   ReservationResponse,
