@@ -272,6 +272,31 @@ code {
   background: #fee2e2;
 }
 
+.reservation-table-wrapper {
+  width: 100%;
+  margin-top: 32px;
+  overflow-x: auto;
+}
+
+.reservation-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.reservation-table th,
+.reservation-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 12px;
+  vertical-align: top;
+}
+
+.reservation-table th {
+  color: var(--text-h);
+  font-weight: 700;
+}
+
 @media (max-width: 720px) {
   .site-header {
     align-items: flex-start;
