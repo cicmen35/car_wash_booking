@@ -2,9 +2,14 @@ import ReservationForm from '../components/ReservationForm'
 
 function BookingPage() {
   return (
-    <main>
-      <h1>Book a Reservation</h1>
-      <p>Choose a service, date, and time for your visit.</p>
+    <main className="booking-page">
+      <section className="page-heading">
+        <h1>Book a reservation</h1>
+        <p>
+          Fill in your contact details, choose a service, and select your
+          preferred date and time.
+        </p>
+      </section>
       <ReservationForm />
     </main>
   )

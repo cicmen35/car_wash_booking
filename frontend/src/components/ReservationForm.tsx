@@ -20,6 +20,32 @@ const initialFormData = {
   additionalNotes: '',
 }
 
+function validateForm(formData: typeof initialFormData): string {
+  if (!formData.customerName.trim()) {
+    return 'Customer name is required.'
+  }
+  if (!formData.email.trim()) {
+    return 'Email is required.'
+  }
+  if (!formData.phone.trim()) {
+    return 'Phone number is required.'
+  }
+  if (!formData.carModel.trim()) {
+    return 'Car model is required.'
+  }
+  if (!formData.serviceId) {
+    return 'Service is required.'
+  }
+  if (!formData.reservationDate) {
+    return 'Reservation date is required.'
+  }
+  if (!formData.reservationTime) {
+    return 'Reservation time is required.'
+  }
+
+  return ''
+}
+
 function ReservationForm() {
   const [searchParams] = useSearchParams()
   const selectedServiceId = searchParams.get('serviceId') ?? ''
@@ -64,22 +90,31 @@ function ReservationForm() {
     event.preventDefault()
     setSuccessMessage('')
     setErrorMessage('')
+
+    const validationMessage = validateForm(formData)
+    if (validationMessage) {
+      setErrorMessage(validationMessage)
+      return
+    }
+
     setIsSubmitting(true)
 
     const reservation: ReservationRequest = {
-      customerName: formData.customerName,
-      email: formData.email,
-      phone: formData.phone,
-      carModel: formData.carModel,
+      customerName: formData.customerName.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      carModel: formData.carModel.trim(),
       serviceId: Number(formData.serviceId),
       reservationDate: formData.reservationDate,
       reservationTime: formData.reservationTime,
-      additionalNotes: formData.additionalNotes || undefined,
+      additionalNotes: formData.additionalNotes.trim() || undefined,
     }
 
     try {
       await createReservation(reservation)
-      setSuccessMessage('Reservation request submitted successfully.')
+      setSuccessMessage(
+        'Reservation request submitted successfully. We will confirm your booking soon.',
+      )
       setFormData(initialFormData)
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -123,7 +158,7 @@ function ReservationForm() {
       </label>
 
       <label>
-        Phone
+        Phone number
         <input
           name="phone"
           type="tel"
