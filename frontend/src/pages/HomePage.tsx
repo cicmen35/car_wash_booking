@@ -1,10 +1,20 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import SuccessMessage from '../components/SuccessMessage'
+
 function HomePage() {
+  const [messageSent, setMessageSent] = useState(false)
+
+  function handleTextUsSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setMessageSent(true)
+    event.currentTarget.reset()
+  }
+
   return (
     <main className="home-page">
       <section className="home-hero">
-        <p className="eyebrow">Professional car cleaning</p>
         <h1>Umyvanie aut Nitra</h1>
         <p className="hero-copy">
           Interior and exterior car wash reservations with careful detailing,
@@ -41,36 +51,63 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="home-section">
+      <section className="text-us-section">
         <div className="section-heading">
-          <p className="eyebrow">Why choose us</p>
-          <h2>Simple booking, careful work</h2>
+          <p className="eyebrow">Contact us</p>
+          <h2>Need help choosing a service?</h2>
+          <p>
+            Leave your contact details and message. We will help you choose the
+            right wash, detailing option, or reservation time.
+          </p>
         </div>
-        <div className="feature-grid">
-          <article>
-            <h3>Interior and exterior detailing</h3>
-            <p>Choose the level of cleaning that fits your car and schedule.</p>
-          </article>
-          <article>
-            <h3>Flexible reservation times</h3>
-            <p>Book online and choose the time slot that works for your day.</p>
-          </article>
-          <article>
-            <h3>Friendly local service</h3>
-            <p>Clear communication and practical care from a local car wash team.</p>
-          </article>
-        </div>
+
+        <form className="text-us-form" onSubmit={handleTextUsSubmit}>
+          <SuccessMessage
+            message={
+              messageSent
+                ? 'Your message is ready. We will connect this form to the backend later.'
+                : ''
+            }
+          />
+
+          <label>
+            Name
+            <input name="name" type="text" required />
+          </label>
+
+          <label>
+            Phone number
+            <input name="phone" type="tel" required />
+          </label>
+
+          <label>
+            Email
+            <input name="email" type="email" required />
+          </label>
+
+          <label className="full-width">
+            Message
+            <textarea name="message" rows={5} />
+          </label>
+
+          <button type="submit">Send message</button>
+        </form>
       </section>
 
-      <section className="contact-cta">
-        <div>
-          <p className="eyebrow">Questions?</p>
-          <h2>Need help choosing a service?</h2>
-          <p>Contact us and we will help you pick the right wash or detailing package.</p>
+      <section className="map-section">
+        <div className="section-heading">
+          <p className="eyebrow">Location</p>
+          <h2>Where you can find us</h2>
         </div>
-        <Link className="button-primary" to="/contact">
-          Contact us
-        </Link>
+
+        <div className="map-preview">
+          <iframe
+            title="Umyvanie aut Nitra location map"
+            src="https://www.google.com/maps?q=Nitra%2C%20Slovakia&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
       </section>
     </main>
   )
