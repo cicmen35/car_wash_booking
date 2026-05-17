@@ -121,7 +121,7 @@ code {
 
 .site-logo {
   color: var(--text-h);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   text-decoration: none;
 }
@@ -157,9 +157,30 @@ code {
 }
 
 .home-hero {
-  max-width: 760px;
+  position: relative;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
-  padding: 40px 0 16px;
+  padding: 220px 0 210px;
+  overflow: visible;
+}
+
+.home-hero__logo {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  z-index: 0;
+  width: min(1000px, 100%);
+  height: min(720px, 88vw);
+  border-radius: 32px;
+  object-fit: fill;
+  opacity: 0.13;
+  transform: translate(-50%, -50%) scale(0.86);
+  animation: heroLogoIntro 900ms ease-out forwards;
+}
+
+.home-hero__content {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -532,6 +553,13 @@ code {
   }
 }
 
+@keyframes heroLogoIntro {
+  to {
+    opacity: 0.18;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 @media (max-width: 720px) {
   .site-header {
     align-items: flex-start;
@@ -552,7 +580,12 @@ code {
   }
 
   .home-hero {
-    padding-top: 16px;
+    padding: 150px 0 136px;
+  }
+
+  .home-hero__logo {
+    width: min(660px, 100%);
+    height: min(560px, 112vw);
   }
 
   .hero-copy {

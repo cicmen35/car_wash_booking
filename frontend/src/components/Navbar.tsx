@@ -3,10 +3,6 @@ import { NavLink } from 'react-router-dom'
 function Navbar() {
   return (
     <header className="site-header">
-      <NavLink to="/" className="site-logo">
-        Umyvanie aut Nitra
-      </NavLink>
-
       <nav className="site-nav" aria-label="Main navigation">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/services">Services</NavLink>
