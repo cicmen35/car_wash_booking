@@ -1,10 +1,12 @@
 import type { Service } from '../types'
+import { Link } from 'react-router-dom'
 
 interface ServiceCardProps {
   service: Service
+  showBookingButton?: boolean
 }
 
-function ServiceCard({ service }: ServiceCardProps) {
+function ServiceCard({ service, showBookingButton = false }: ServiceCardProps) {
   return (
     <article className="service-card">
       <div className="service-card__header">
@@ -16,6 +18,12 @@ function ServiceCard({ service }: ServiceCardProps) {
         {service.durationMinutes} minutes
       </p>
       <p>{service.description}</p>
+
+      {showBookingButton && (
+        <Link className="button-primary service-card__action" to={`/book?serviceId=${service.id}`}>
+          Book this service
+        </Link>
+      )}
     </article>
   )
 }

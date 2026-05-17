@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AxiosError } from 'axios'
+import { useSearchParams } from 'react-router-dom'
 
 import { createReservation } from '../api/reservationApi'
 import { getServices } from '../api/serviceApi'
@@ -20,7 +21,12 @@ const initialFormData = {
 }
 
 function ReservationForm() {
-  const [formData, setFormData] = useState(initialFormData)
+  const [searchParams] = useSearchParams()
+  const selectedServiceId = searchParams.get('serviceId') ?? ''
+  const [formData, setFormData] = useState({
+    ...initialFormData,
+    serviceId: selectedServiceId,
+  })
   const [services, setServices] = useState<ServiceResponse[]>([])
   const [isLoadingServices, setIsLoadingServices] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
