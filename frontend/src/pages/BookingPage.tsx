@@ -132,6 +132,7 @@ function getAvailableTimes(
 function BookingPage() {
   const [searchParams] = useSearchParams()
   const preselectedServiceId = Number(searchParams.get('serviceId'))
+  const pageTopRef = useRef<HTMLElement>(null)
   const scheduleRef = useRef<HTMLElement>(null)
   const detailsRef = useRef<HTMLElement>(null)
 
@@ -312,6 +313,12 @@ function BookingPage() {
       setSuccessMessage(
         'Reservation created successfully. We will confirm your booking soon.',
       )
+      requestAnimationFrame(() => {
+        pageTopRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      })
     } catch (error) {
       if (error instanceof AxiosError) {
         setErrorMessage(
@@ -328,7 +335,7 @@ function BookingPage() {
 
   return (
     <main className="booking-page">
-      <section className="page-heading">
+      <section className="page-heading" ref={pageTopRef}>
         <h1>Book a reservation</h1>
         <p>
           Pick a service, choose an available date and time, then leave your
