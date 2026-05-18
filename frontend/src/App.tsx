@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
+import AdminReservationDetailPage from './pages/AdminReservationDetailPage'
 import AdminReservationsPage from './pages/AdminReservationsPage'
 import BookingPage from './pages/BookingPage'
 import ContactPage from './pages/ContactPage'
@@ -20,6 +21,10 @@ function App() {
           <Route
             path="/admin/reservations"
             element={<AdminReservationsPage />}
+          />
+          <Route
+            path="/admin/reservations/:id"
+            element={<AdminReservationDetailPage />}
           />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>

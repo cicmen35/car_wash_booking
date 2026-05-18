@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { getReservations } from '../api/reservationApi'
 import type { ReservationResponse } from '../types'
@@ -39,41 +40,40 @@ function ReservationTable() {
   }
 
   return (
-    <div className="reservation-table-wrapper">
-      <table className="reservation-table">
-        <thead>
-          <tr>
-            <th>Customer</th>
-            <th>Contact</th>
-            <th>Car</th>
-            <th>Service</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Status</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reservations.map((reservation) => (
-            <tr key={reservation.id}>
-              <td>{reservation.customerName}</td>
-              <td>
-                <div>{reservation.email}</div>
-                <div>{reservation.phone}</div>
-              </td>
-              <td>{reservation.carModel}</td>
-              <td>{reservation.serviceName}</td>
-              <td>{reservation.reservationDate}</td>
-              <td>{reservation.reservationTime}</td>
-              <td>
-                <StatusBadge status={reservation.status} />
-              </td>
-              <td>{reservation.additionalNotes || '-'}</td>
+    <>
+      <ErrorMessage message={errorMessage} />
+      <div className="reservation-table-wrapper">
+        <table className="reservation-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Reservation</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {reservations.map((reservation) => (
+              <tr key={reservation.id}>
+                <td>{reservation.reservationDate}</td>
+                <td>{reservation.reservationTime}</td>
+                <td>
+                  <StatusBadge status={reservation.status} />
+                </td>
+                <td>
+                  <Link
+                    className="reservation-detail-link"
+                    to={`/admin/reservations/${reservation.id}`}
+                  >
+                    Details
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   )
 }
 
