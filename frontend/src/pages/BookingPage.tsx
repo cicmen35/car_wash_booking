@@ -238,6 +238,15 @@ function BookingPage() {
     })
   }
 
+  function scrollToFeedback() {
+    requestAnimationFrame(() => {
+      pageTopRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    })
+  }
+
   function handleCustomerChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
@@ -282,6 +291,7 @@ function BookingPage() {
     const validationMessage = validateBooking()
     if (validationMessage) {
       setErrorMessage(validationMessage)
+      scrollToFeedback()
       return
     }
 
@@ -313,12 +323,7 @@ function BookingPage() {
       setSuccessMessage(
         'Reservation created successfully. We will confirm your booking soon.',
       )
-      requestAnimationFrame(() => {
-        pageTopRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        })
-      })
+      scrollToFeedback()
     } catch (error) {
       if (error instanceof AxiosError) {
         setErrorMessage(
@@ -328,6 +333,7 @@ function BookingPage() {
       } else {
         setErrorMessage('Reservation could not be created. Please try again.')
       }
+      scrollToFeedback()
     } finally {
       setIsSubmitting(false)
     }
