@@ -136,15 +136,21 @@ code {
   gap: 8px;
 }
 
-.site-nav a {
+.site-nav a,
+.site-nav button {
   color: var(--text);
+  border: 0;
   border-radius: 6px;
   padding: 8px 12px;
+  background: transparent;
+  font: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .site-nav a:hover,
-.site-nav a.active {
+.site-nav a.active,
+.site-nav button:hover {
   color: var(--text-h);
   background: var(--social-bg);
 }

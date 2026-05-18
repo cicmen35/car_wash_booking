@@ -2,7 +2,7 @@ function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" id="contact">
       <div>
         <h2>Umyvanie aut Nitra</h2>
         <p>Phone: +421 123 456 789</p>

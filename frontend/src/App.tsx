@@ -5,7 +5,6 @@ import Navbar from './components/Navbar'
 import AdminReservationDetailPage from './pages/AdminReservationDetailPage'
 import AdminReservationsPage from './pages/AdminReservationsPage'
 import BookingPage from './pages/BookingPage'
-import ContactPage from './pages/ContactPage'
 import HomePage from './pages/HomePage'
 import ServicesPage from './pages/ServicesPage'
 
@@ -26,7 +25,6 @@ function App() {
             path="/admin/reservations/:id"
             element={<AdminReservationDetailPage />}
           />
-          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </div>
       <Footer />
