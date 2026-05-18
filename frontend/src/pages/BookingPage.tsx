@@ -73,6 +73,13 @@ function addMonths(date: Date, months: number): Date {
   return new Date(date.getFullYear(), date.getMonth() + months, 1)
 }
 
+function getMonthDifference(fromDate: Date, toDate: Date): number {
+  return (
+    (toDate.getFullYear() - fromDate.getFullYear()) * 12 +
+    (toDate.getMonth() - fromDate.getMonth())
+  )
+}
+
 function getCalendarDates(monthDate: Date): string[] {
   const firstDayOfMonth = getMonthStart(monthDate)
   const mondayOffset = (firstDayOfMonth.getDay() + 6) % 7
@@ -142,10 +149,16 @@ function BookingPage() {
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
 
+  const currentMonth = useMemo(() => getMonthStart(new Date()), [])
+  const maxCalendarMonth = useMemo(() => addMonths(currentMonth, 3), [currentMonth])
   const calendarDates = useMemo(
     () => getCalendarDates(calendarMonth),
     [calendarMonth],
   )
+  const canGoToPreviousMonth =
+    getMonthDifference(currentMonth, calendarMonth) > 0
+  const canGoToNextMonth =
+    getMonthDifference(currentMonth, calendarMonth) < 3
 
   useEffect(() => {
     async function loadBookingData() {
@@ -203,11 +216,17 @@ function BookingPage() {
   }
 
   function handlePreviousMonth() {
-    setCalendarMonth((currentMonth) => addMonths(currentMonth, -1))
+    setCalendarMonth((activeMonth) => {
+      const previousMonth = addMonths(activeMonth, -1)
+      return previousMonth < currentMonth ? activeMonth : previousMonth
+    })
   }
 
   function handleNextMonth() {
-    setCalendarMonth((currentMonth) => addMonths(currentMonth, 1))
+    setCalendarMonth((activeMonth) => {
+      const nextMonth = addMonths(activeMonth, 1)
+      return nextMonth > maxCalendarMonth ? activeMonth : nextMonth
+    })
   }
 
   function handleTimeSelect(time: string) {
@@ -348,11 +367,19 @@ function BookingPage() {
             <div className="availability-picker">
               <div className="calendar-picker" aria-label="Available dates">
                 <div className="calendar-header">
-                  <button type="button" onClick={handlePreviousMonth}>
+                  <button
+                    type="button"
+                    onClick={handlePreviousMonth}
+                    disabled={!canGoToPreviousMonth}
+                  >
                     Previous
                   </button>
                   <h3>{formatMonthTitle(calendarMonth)}</h3>
-                  <button type="button" onClick={handleNextMonth}>
+                  <button
+                    type="button"
+                    onClick={handleNextMonth}
+                    disabled={!canGoToNextMonth}
+                  >
                     Next
                   </button>
                 </div>
@@ -385,7 +412,6 @@ function BookingPage() {
                         onClick={() => handleDateSelect(date)}
                       >
                         <span>{dayNumber}</span>
-                        <small>{isDisabled ? '' : times.length}</small>
                       </button>
                     )
                   })}
