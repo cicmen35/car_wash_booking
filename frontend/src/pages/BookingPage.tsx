@@ -22,8 +22,6 @@ const defaultTimeSlots = [
   '09:00',
   '10:00',
   '11:00',
-  '12:00',
-  '13:00',
   '14:00',
   '15:00',
   '16:00',
@@ -38,7 +36,7 @@ const initialCustomerData = {
   additionalNotes: '',
 }
 
-const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+const weekDays = ['Pon', 'Uto', 'Str', 'Štv', 'Pia', 'Sob', 'Ned']
 
 function toService(service: ServiceResponse): Service {
   return {
@@ -321,17 +319,17 @@ function BookingPage() {
       setCustomerData(initialCustomerData)
       setSelectedTime('')
       setSuccessMessage(
-        'Reservation created successfully. We will confirm your booking soon.',
+        'Rezervácia úspešne vytvorená.',
       )
       scrollToFeedback()
     } catch (error) {
       if (error instanceof AxiosError) {
         setErrorMessage(
           error.response?.data?.message ??
-            'Reservation could not be created. Please try again.',
+          'Rezerváciu sa nepodarilo vytvoriť. Skúste to znovu.',
         )
       } else {
-        setErrorMessage('Reservation could not be created. Please try again.')
+        setErrorMessage('Rezerváciu sa nepodarilo vytvoriť. Skúste to znovu.')
       }
       scrollToFeedback()
     } finally {
@@ -342,10 +340,9 @@ function BookingPage() {
   return (
     <main className="booking-page">
       <section className="page-heading" ref={pageTopRef}>
-        <h1>Book a reservation</h1>
+        <h1>Rezervujte si termín</h1>
         <p>
-          Pick a service, choose an available date and time, then leave your
-          contact details.
+          Zvolte si službu, vyberte si vhodný termín a zanechajte svoje kontaktné údaje.
         </p>
       </section>
 
@@ -357,8 +354,7 @@ function BookingPage() {
         <form className="booking-flow" onSubmit={handleSubmit}>
           <section className="booking-step">
             <div className="section-heading">
-              <p className="eyebrow">Step 1</p>
-              <h2>Select a service</h2>
+              <h2>Výber služby</h2>
             </div>
             <div className="services-grid">
               {services.map((service) => (
@@ -372,10 +368,11 @@ function BookingPage() {
             </div>
           </section>
 
+// Doplnkové služby tu
+
           <section className="booking-step" ref={scheduleRef}>
             <div className="section-heading">
-              <p className="eyebrow">Step 2</p>
-              <h2>Select date and time</h2>
+              <h2>Výber dátumu a času</h2>
             </div>
             <div className="availability-picker">
               <div className="calendar-picker" aria-label="Available dates">
@@ -385,7 +382,7 @@ function BookingPage() {
                     onClick={handlePreviousMonth}
                     disabled={!canGoToPreviousMonth}
                   >
-                    Previous
+                    {'<'}
                   </button>
                   <h3>{formatMonthTitle(calendarMonth)}</h3>
                   <button
@@ -393,7 +390,7 @@ function BookingPage() {
                     onClick={handleNextMonth}
                     disabled={!canGoToNextMonth}
                   >
-                    Next
+                    {'>'}
                   </button>
                 </div>
 
@@ -451,14 +448,13 @@ function BookingPage() {
 
           <section className="booking-step" ref={detailsRef}>
             <div className="section-heading">
-              <p className="eyebrow">Step 3</p>
-              <h2>Your details</h2>
+              <h2>Vaše údaje</h2>
             </div>
 
             <div className="booking-details-grid">
               <div className="customer-details">
                 <label>
-                  Name and surname
+                  Meno a priezvisko
                   <input
                     name="customerName"
                     type="text"
@@ -480,7 +476,7 @@ function BookingPage() {
                 </label>
 
                 <label>
-                  Phone
+                  Telefónne číslo
                   <input
                     name="phone"
                     type="tel"
@@ -491,7 +487,7 @@ function BookingPage() {
                 </label>
 
                 <label>
-                  Car model
+                  Model auta
                   <input
                     name="carModel"
                     type="text"
@@ -502,7 +498,7 @@ function BookingPage() {
                 </label>
 
                 <label className="full-width">
-                  Additional note
+                  Poznámka
                   <textarea
                     name="additionalNotes"
                     value={customerData.additionalNotes}
@@ -513,24 +509,24 @@ function BookingPage() {
               </div>
 
               <aside className="booking-summary">
-                <h2>Summary</h2>
+                <h2>Sumarizácia</h2>
                 <dl>
                   <div>
-                    <dt>Service</dt>
+                    <dt>Služba</dt>
                     <dd>{selectedService?.name ?? '-'}</dd>
                   </div>
                   <div>
-                    <dt>Date</dt>
+                    <dt>Dátum</dt>
                     <dd>
                       {selectedDate ? formatDisplayDate(selectedDate) : '-'}
                     </dd>
                   </div>
                   <div>
-                    <dt>Time</dt>
+                    <dt>Čas</dt>
                     <dd>{selectedTime || '-'}</dd>
                   </div>
                   <div>
-                    <dt>Final price</dt>
+                    <dt>Finálna suma</dt>
                     <dd>{selectedService ? `€${selectedService.price}` : '-'}</dd>
                   </div>
                 </dl>
@@ -543,7 +539,7 @@ function BookingPage() {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Creating reservation...' : 'Create reservation'}
+            {isSubmitting ? 'Vytváram rezerváciu...' : 'Vytvoriť rezerváciu'}
           </button>
         </form>
       )}

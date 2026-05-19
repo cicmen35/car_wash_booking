@@ -39,7 +39,7 @@ function ServicesPage() {
   return (
     <main>
       <section className="page-heading">
-        <h1>Services</h1>
+        <h1>Naše služby</h1>
       </section>
 
       {isLoading && <LoadingSpinner label="Loading services..." />}

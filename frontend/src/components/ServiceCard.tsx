@@ -37,7 +37,7 @@ function ServiceCard({
       </div>
 
       <p className="service-card__duration">
-        {service.durationMinutes} minutes
+        {service.durationMinutes} minút
       </p>
       <p>{service.description}</p>
 
@@ -46,7 +46,7 @@ function ServiceCard({
           className="button-primary service-card__action"
           to={`/book?serviceId=${service.id}`}
         >
-          Book this service
+          Rezervovať službu
         </Link>
       )}
     </article>

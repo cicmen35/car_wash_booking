@@ -88,10 +88,10 @@ function HomePage() {
         <div className="home-hero__content">
           <div className="hero-actions">
             <Link className="button-primary" to="/book">
-              Book a wash
+              Rezervujte si termín
             </Link>
             <Link className="button-secondary" to="/services">
-              View services
+              Prejsť na služby
             </Link>
           </div>
         </div>
@@ -99,7 +99,7 @@ function HomePage() {
 
       <section className="home-section">
         <div className="section-heading section-heading--centered">
-          <h2>Results from our work</h2>
+          <h2>Výsledky našej poctivej práce</h2>
         </div>
         <div className="showcase-grid">
           {showcaseItems.map((item) => (
@@ -135,11 +135,10 @@ function HomePage() {
 
       <section className="text-us-section">
         <div className="section-heading">
-          <p className="eyebrow">Contact us</p>
-          <h2>Need help choosing a service?</h2>
+          <p className="eyebrow">Kontaktujte nás</p>
+          <h2>Potrebujete pomoc s výberom?</h2>
           <p>
-            Leave your contact details and message. We will help you choose the
-            right wash, detailing option, or reservation time.
+            Zanechajte nám kontakt a správu a my Vám s radosťou pomôžeme s výberom.
           </p>
         </div>
 
@@ -153,12 +152,12 @@ function HomePage() {
           />
 
           <label>
-            Name
+            Meno
             <input name="name" type="text" required />
           </label>
 
           <label>
-            Phone number
+            Telefónne číslo
             <input name="phone" type="tel" required />
           </label>
 
@@ -168,18 +167,18 @@ function HomePage() {
           </label>
 
           <label className="full-width">
-            Message
+            Správa
             <textarea name="message" rows={5} />
           </label>
 
-          <button type="submit">Send message</button>
+          <button type="submit">Odoslať správu</button>
         </form>
       </section>
 
       <section className="map-section">
         <div className="section-heading">
-          <p className="eyebrow">Location</p>
-          <h2>Where you can find us</h2>
+          <p className="eyebrow">Lokalita</p>
+          <h2>Kde nás nájdete</h2>
         </div>
 
         <div className="map-preview">

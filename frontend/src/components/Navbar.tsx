@@ -32,11 +32,11 @@ function Navbar() {
   return (
     <header className="site-header">
       <nav className="site-nav" aria-label="Main navigation">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/services">Services</NavLink>
-        <NavLink to="/book">Book</NavLink>
+        <NavLink to="/">Domov</NavLink>
+        <NavLink to="/services">Služby</NavLink>
+        <NavLink to="/book">Rezervácia</NavLink>
         <button type="button" onClick={handleContactClick}>
-          Contact
+          Kontakt
         </button>
         <button
           type="button"

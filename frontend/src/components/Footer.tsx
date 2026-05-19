@@ -4,13 +4,13 @@ function Footer() {
   return (
     <footer className="site-footer" id="contact">
       <div>
-        <h2>Umyvanie aut Nitra</h2>
-        <p>Phone: +421 123 456 789</p>
+        <h2>Umývanie áut Nitra</h2>
+        <p>Phone: +421 911 841 495</p>
         <p>Email: detailing@nitra.com</p>
       </div>
 
       <div>
-        <h2>Follow us</h2>
+        <h2>Sledujte nás</h2>
         <p>
           Instagram:{' '}
           <a
