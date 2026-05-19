@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.autoglow.carwash.dto.ContactMessageRequest;
 import com.autoglow.carwash.dto.ContactMessageResponse;
 import com.autoglow.carwash.entity.ContactMessageEntity;
+import com.autoglow.carwash.exception.ResourceNotFoundException;
 import com.autoglow.carwash.repository.ContactMessageRepository;
 
 @Service
@@ -36,6 +37,14 @@ public class ContactMessageService {
 				.stream()
 				.map(this::toResponse)
 				.toList();
+	}
+
+	@Transactional
+	public void deleteContactMessage(Long id) {
+		ContactMessageEntity contactMessage = contactMessageRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Contact message not found with id: " + id));
+
+		contactMessageRepository.delete(contactMessage);
 	}
 
 	private ContactMessageResponse toResponse(ContactMessageEntity contactMessage) {

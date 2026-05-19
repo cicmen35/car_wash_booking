@@ -20,3 +20,7 @@ export async function getContactMessages(): Promise<ContactMessageResponse[]> {
   )
   return response.data
 }
+
+export async function deleteContactMessage(id: number): Promise<void> {
+  await apiClient.delete(`/contact-messages/${id}`)
+}

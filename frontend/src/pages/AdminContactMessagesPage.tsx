@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { getContactMessages } from '../api/contactMessageApi'
+import {
+  deleteContactMessage,
+  getContactMessages,
+} from '../api/contactMessageApi'
 import ErrorMessage from '../components/ErrorMessage'
 import LoadingSpinner from '../components/LoadingSpinner'
 import type { ContactMessageResponse } from '../types'
@@ -15,6 +18,7 @@ function formatCreatedAt(value: string): string {
 function AdminContactMessagesPage() {
   const [messages, setMessages] = useState<ContactMessageResponse[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [deletingMessageId, setDeletingMessageId] = useState<number | null>(null)
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
@@ -31,6 +35,22 @@ function AdminContactMessagesPage() {
 
     loadMessages()
   }, [])
+
+  async function handleDeleteMessage(id: number) {
+    setDeletingMessageId(id)
+    setErrorMessage('')
+
+    try {
+      await deleteContactMessage(id)
+      setMessages((currentMessages) =>
+        currentMessages.filter((message) => message.id !== id),
+      )
+    } catch {
+      setErrorMessage('Správu sa nepodarilo vymazať.')
+    } finally {
+      setDeletingMessageId(null)
+    }
+  }
 
   return (
     <main className="admin-contact-page">
@@ -51,7 +71,18 @@ function AdminContactMessagesPage() {
             <article className="contact-message-card" key={message.id}>
               <div>
                 <h2>{message.name}</h2>
-                <p>{formatCreatedAt(message.createdAt)}</p>
+                <div className="contact-message-card__meta">
+                  <p>{formatCreatedAt(message.createdAt)}</p>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteMessage(message.id)}
+                    disabled={deletingMessageId === message.id}
+                  >
+                    {deletingMessageId === message.id
+                      ? 'Vymazávam...'
+                      : 'Vyriešené'}
+                  </button>
+                </div>
               </div>
 
               <dl>
