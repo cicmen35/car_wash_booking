@@ -26,7 +26,8 @@
   height: min(720px, 88vw);
   border-radius: 32px;
   object-fit: fill;
-  opacity: 0.13;
+  opacity: var(--hero-logo-opacity-start);
+  filter: var(--hero-logo-filter);
   transform: translate(-50%, -50%) scale(0.86);
   animation: heroLogoIntro 900ms ease-out forwards;
 }
@@ -533,7 +534,7 @@
 
 @keyframes heroLogoIntro {
   to {
-    opacity: 0.18;
+    opacity: var(--hero-logo-opacity-end);
     transform: translate(-50%, -50%) scale(1);
   }
 }

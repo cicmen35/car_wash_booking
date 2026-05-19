@@ -135,8 +135,8 @@ function HomePage() {
 
       <section className="text-us-section">
         <div className="section-heading">
-          <p className="eyebrow">Kontaktujte nás</p>
-          <h2>Potrebujete pomoc s výberom?</h2>
+          <p className="eyebrow">Potrebujete pomoc s výberom?</p>
+          <h2>Kontaktujte nás</h2>
           <p>
             Zanechajte nám kontakt a správu a my Vám s radosťou pomôžeme s výberom.
           </p>

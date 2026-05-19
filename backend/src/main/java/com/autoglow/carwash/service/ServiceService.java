@@ -94,7 +94,7 @@ public class ServiceService {
 						480),
 				new ServiceEntity(
 						null,
-						"Dekontaminácia laku",
+						"DEKONTAMINÁCIA LAKU",
 						"Dekontaminácia laku.",
 						new BigDecimal("30.00"),
 						90)));
