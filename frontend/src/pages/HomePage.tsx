@@ -1,11 +1,74 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import exterior1After from '../assets/exterior1_after.png'
+import exterior1Before from '../assets/exterior1_before.png'
+import exterior2After from '../assets/exterior2_after.png'
+import exterior2Before from '../assets/exterior2_before.png'
+import exterior3After from '../assets/exterior3_after.png'
+import exterior3Before from '../assets/exterior3_before.png'
+import exterior5After from '../assets/exterior5_after.png'
+import exterior5Before from '../assets/exterior5_before.png'
+import interior1After from '../assets/interior1_after.png'
+import interior1Before from '../assets/interior1_before.png'
+import interior2After from '../assets/interior2_after.png'
+import interior2Before from '../assets/interior2_before.png'
+import interior3After from '../assets/interior3_after.png'
+import interior3Before from '../assets/interior3_before.png'
+import interior4After from '../assets/interior4_after.png'
+import interior4Before from '../assets/interior4_before.png'
 import logo from '../assets/logo.jpg'
 import SuccessMessage from '../components/SuccessMessage'
 
+const showcaseItems = [
+  {
+    title: 'Exterior wash',
+    before: exterior1Before,
+    after: exterior1After,
+  },
+  {
+    title: 'Paint refresh',
+    before: exterior2Before,
+    after: exterior2After,
+  },
+  {
+    title: 'Exterior detailing',
+    before: exterior3Before,
+    after: exterior3After,
+  },
+  {
+    title: 'Premium exterior finish',
+    before: exterior5Before,
+    after: exterior5After,
+  },
+  {
+    title: 'Interior cleaning',
+    before: interior1Before,
+    after: interior1After,
+  },
+  {
+    title: 'Seat and cabin care',
+    before: interior2Before,
+    after: interior2After,
+  },
+  {
+    title: 'Dashboard detail',
+    before: interior3Before,
+    after: interior3After,
+  },
+  {
+    title: 'Full interior refresh',
+    before: interior4Before,
+    after: interior4After,
+  },
+]
+
 function HomePage() {
   const [messageSent, setMessageSent] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string
+    alt: string
+  } | null>(null)
 
   function handleTextUsSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -35,23 +98,38 @@ function HomePage() {
       </section>
 
       <section className="home-section">
-        <div className="section-heading">
-          <p className="eyebrow">Services</p>
-          <h2>Cleaning options for every car</h2>
+        <div className="section-heading section-heading--centered">
+          <h2>Results from our work</h2>
         </div>
-        <div className="feature-grid">
-          <article>
-            <h3>Exterior wash</h3>
-            <p>Hand washing, wheel cleaning, and a clean finish for daily use.</p>
-          </article>
-          <article>
-            <h3>Interior cleaning</h3>
-            <p>Vacuuming, dashboard care, window cleaning, and cabin refresh.</p>
-          </article>
-          <article>
-            <h3>Full detailing</h3>
-            <p>Complete interior and exterior care for a more polished result.</p>
-          </article>
+        <div className="showcase-grid">
+          {showcaseItems.map((item) => (
+            <article className="showcase-card" key={item.title}>
+              <div className="showcase-pair">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelectedImage({
+                      src: item.before,
+                      alt: `${item.title} before`,
+                    })
+                  }
+                >
+                  <img src={item.before} alt={`${item.title} before`} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelectedImage({
+                      src: item.after,
+                      alt: `${item.title} after`,
+                    })
+                  }
+                >
+                  <img src={item.after} alt={`${item.title} after`} />
+                </button>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -113,6 +191,30 @@ function HomePage() {
           />
         </div>
       </section>
+
+      {selectedImage ? (
+        <div
+          className="image-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Enlarged showcase image"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            type="button"
+            className="image-lightbox__close"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Close image preview"
+          >
+            ×
+          </button>
+          <img
+            src={selectedImage.src}
+            alt={selectedImage.alt}
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      ) : null}
     </main>
   )
 }
