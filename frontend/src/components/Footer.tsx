@@ -11,7 +11,16 @@ function Footer() {
 
       <div>
         <h2>Follow us</h2>
-        <p>Instagram: @umyvanie_aut_nitra</p>
+        <p>
+          Instagram:{' '}
+          <a
+            href="https://www.instagram.com/umyvanie_aut_nitra/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            @umyvanie_aut_nitra
+          </a>
+        </p>
         <p>
           Facebook:{' '}
           <a
@@ -25,7 +34,7 @@ function Footer() {
       </div>
 
       <p className="copyright">
-        Copyright &copy; {currentYear} umyvanie.aut.nitra
+        Copyright &copy; {currentYear} Oliver Hinca
       </p>
     </footer>
   )
