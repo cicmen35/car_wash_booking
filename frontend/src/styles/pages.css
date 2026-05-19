@@ -168,6 +168,10 @@
   padding: 24px;
 }
 
+.text-us-form .message {
+  grid-column: 1 / -1;
+}
+
 .text-us-form label {
   display: flex;
   flex-direction: column;
@@ -202,6 +206,11 @@
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+}
+
+.text-us-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 .map-section {
@@ -532,6 +541,57 @@
   background: #fee2e2;
 }
 
+.admin-contact-page {
+  text-align: left;
+}
+
+.contact-message-list {
+  display: grid;
+  gap: 16px;
+}
+
+.contact-message-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.contact-message-card>div:first-child {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.contact-message-card>div:first-child p {
+  color: var(--text);
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.contact-message-card dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+  margin: 0;
+}
+
+.contact-message-card dt {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.contact-message-card dd {
+  margin: 4px 0 0;
+  color: var(--text-h);
+  font-weight: 700;
+}
+
+.contact-message-card a {
+  color: var(--accent);
+}
+
 @keyframes heroLogoIntro {
   to {
     opacity: var(--hero-logo-opacity-end);
@@ -575,8 +635,13 @@
   }
 
   .text-us-section,
-  .text-us-form {
+  .text-us-form,
+  .contact-message-card dl {
     grid-template-columns: 1fr;
+  }
+
+  .contact-message-card>div:first-child {
+    flex-direction: column;
   }
 
   .map-preview {

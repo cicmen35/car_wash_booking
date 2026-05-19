@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AxiosError } from 'axios'
 
+import { createContactMessage } from '../api/contactMessageApi'
 import exterior1After from '../assets/exterior1_after.png'
 import exterior1Before from '../assets/exterior1_before.png'
 import exterior2After from '../assets/exterior2_after.png'
@@ -18,6 +20,7 @@ import interior3Before from '../assets/interior3_before.png'
 import interior4After from '../assets/interior4_after.png'
 import interior4Before from '../assets/interior4_before.png'
 import logo from '../assets/logo.jpg'
+import ErrorMessage from '../components/ErrorMessage'
 import SuccessMessage from '../components/SuccessMessage'
 
 const showcaseItems = [
@@ -64,16 +67,51 @@ const showcaseItems = [
 ]
 
 function HomePage() {
-  const [messageSent, setMessageSent] = useState(false)
+  const [isMessageSubmitting, setIsMessageSubmitting] = useState(false)
+  const [contactFeedback, setContactFeedback] = useState<{
+    type: 'success' | 'error'
+    message: string
+  } | null>(null)
   const [selectedImage, setSelectedImage] = useState<{
     src: string
     alt: string
   } | null>(null)
 
-  function handleTextUsSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleTextUsSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setMessageSent(true)
-    event.currentTarget.reset()
+    setContactFeedback(null)
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const contactMessage = {
+      name: String(formData.get('name') ?? '').trim(),
+      phone: String(formData.get('phone') ?? '').trim(),
+      email: String(formData.get('email') ?? '').trim(),
+      message: String(formData.get('message') ?? '').trim() || undefined,
+    }
+
+    setIsMessageSubmitting(true)
+
+    try {
+      await createContactMessage(contactMessage)
+      setContactFeedback({
+        type: 'success',
+        message: 'Správa bola úspešne odoslaná.',
+      })
+      form.reset()
+    } catch (error) {
+      const errorMessage =
+        error instanceof AxiosError && !error.response
+          ? 'Správa bola odoslaná, ale prehliadač nevie prečítať odpoveď servera. Skontrolujte CORS alebo pripojenie.'
+          : 'Správu sa nepodarilo odoslať. Skúste to znovu.'
+
+      setContactFeedback({
+        type: 'error',
+        message: errorMessage,
+      })
+    } finally {
+      setIsMessageSubmitting(false)
+    }
   }
 
   return (
@@ -143,13 +181,12 @@ function HomePage() {
         </div>
 
         <form className="text-us-form" onSubmit={handleTextUsSubmit}>
-          <SuccessMessage
-            message={
-              messageSent
-                ? 'Your message is ready. We will connect this form to the backend later.'
-                : ''
-            }
-          />
+          {contactFeedback?.type === 'success' && (
+            <SuccessMessage message={contactFeedback.message} />
+          )}
+          {contactFeedback?.type === 'error' && (
+            <ErrorMessage message={contactFeedback.message} />
+          )}
 
           <label>
             Meno
@@ -171,7 +208,9 @@ function HomePage() {
             <textarea name="message" rows={5} />
           </label>
 
-          <button type="submit">Odoslať správu</button>
+          <button type="submit" disabled={isMessageSubmitting}>
+            {isMessageSubmitting ? 'Odosielam správu...' : 'Odoslať správu'}
+          </button>
         </form>
       </section>
 
