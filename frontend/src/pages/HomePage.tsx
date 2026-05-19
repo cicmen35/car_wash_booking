@@ -23,11 +23,6 @@ function HomePage() {
           aria-hidden="true"
         />
         <div className="home-hero__content">
-          <h1>Umyvanie aut Nitra</h1>
-          <p className="hero-copy">
-            Interior and exterior car wash reservations with careful detailing,
-            flexible booking times, and friendly local service.
-          </p>
           <div className="hero-actions">
             <Link className="button-primary" to="/book">
               Book a wash
