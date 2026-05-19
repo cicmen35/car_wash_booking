@@ -46,34 +46,58 @@ public class ServiceService {
 		serviceRepository.saveAll(List.of(
 				new ServiceEntity(
 						null,
-						"Exterior Wash",
-						"Hand wash, wheel cleaning, and exterior drying.",
-						new BigDecimal("20.00"),
-						30),
+						"KOMPLET INTERIÉR+EXTERIÉR",
+						"Vysávanie, tepovanie sedačiek, podlahy, koberčekov, čistenie stropu, dverí, plastov interiéru, rámov dverí, okien, oživenie plastov, kompletné čistenie exteriéru vrátane detailného čistenia kolies.",
+						new BigDecimal("90.00"),
+						240),
 				new ServiceEntity(
 						null,
-						"Interior Cleaning",
-						"Vacuuming, dashboard wipe-down, window cleaning, and interior refresh.",
-						new BigDecimal("30.00"),
-						45),
+						"INTERIÉR PREMIUM",
+						"Vysávanie, tepovanie sedačiek, podlahy, koberčekov, čistenie stropu, čistenie dverí, čistenie plastov interiéru, oživenie plastov interiéru, čistenie rámov dverí, čistenie okien.",
+						new BigDecimal("75.00"),
+						210),
 				new ServiceEntity(
 						null,
-						"Full Detailing",
-						"Complete interior and exterior cleaning with careful finishing details.",
-						new BigDecimal("70.00"),
-						120),
-				new ServiceEntity(
-						null,
-						"Polishing",
-						"Paint polishing to restore shine and reduce visible surface marks.",
-						new BigDecimal("100.00"),
+						"INTERIÉR EXCLUSIVE",
+						"Vysávanie, tepovanie sedačiek, čistenie plastov, palubnej dosky, dverí, koberčekov, rámov dverí, okien, oživenie plastov.",
+						new BigDecimal("60.00"),
 						180),
 				new ServiceEntity(
 						null,
-						"Premium Package",
-						"Exterior wash, interior cleaning, detailing, and polishing in one package.",
-						new BigDecimal("150.00"),
-						240)));
+						"INTERIÉR CLASSIC",
+						"Vysávanie, čistenie plastov, palubnej dosky, dverí, koberčekov, rámov dverí, okien, oživenie plastov.",
+						new BigDecimal("35.00"),
+						120),
+				new ServiceEntity(
+						null,
+						"EXTERIÉR",
+						"Pred umytie šampónom, ručné umytie šampónom, detailné čistenie kolies, usušenie.",
+						new BigDecimal("15.00"),
+						45),
+				new ServiceEntity(
+						null,
+						"JEDNOSTUPŇOVÁ OCHRANA LAKU",
+						"Jednostupňové leštenie a následne voskovanie celého auta vrátane umytia exteriéru a dekontaminácie laku.",
+						new BigDecimal("100.00"),
+						240),
+				new ServiceEntity(
+						null,
+						"DVOJSTUPŇOVÁ OCHRANA LAKU",
+						"Dvojstupňové leštenie a následne voskovanie celého auta vrátane umytia exteriéru a dekontaminácie laku.",
+						new BigDecimal("200.00"),
+						360),
+				new ServiceEntity(
+						null,
+						"TROJSTUPŇOVÁ OCHRANA LAKU",
+						"Trojstupňové leštenie a následne voskovanie celého auta vrátane umytia exteriéru a dekontaminácie laku.",
+						new BigDecimal("300.00"),
+						480),
+				new ServiceEntity(
+						null,
+						"Dekontaminácia laku",
+						"Dekontaminácia laku.",
+						new BigDecimal("30.00"),
+						90)));
 	}
 
 	private ServiceResponse toResponse(ServiceEntity service) {

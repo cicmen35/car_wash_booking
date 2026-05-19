@@ -57,9 +57,17 @@
   margin-bottom: 10px;
 }
 
+.service-card__header h2 {
+  min-width: 0;
+  font-size: 18px;
+  line-height: 130%;
+  overflow-wrap: anywhere;
+}
+
 .service-card__price {
+  flex-shrink: 0;
   color: var(--text-h);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   white-space: nowrap;
 }
