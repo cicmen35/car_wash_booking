@@ -368,8 +368,6 @@ function BookingPage() {
             </div>
           </section>
 
-// Doplnkové služby tu
-
           <section className="booking-step" ref={scheduleRef}>
             <div className="section-heading">
               <h2>Výber dátumu a času</h2>
