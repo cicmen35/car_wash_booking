@@ -116,7 +116,7 @@ function HomePage() {
 
   return (
     <main className="home-page">
-      <section className="home-hero">
+      <section className="home-hero" aria-labelledby="home-brand">
         <img
           className="home-hero__logo"
           src={logo}
@@ -124,6 +124,13 @@ function HomePage() {
           aria-hidden="true"
         />
         <div className="home-hero__content">
+          <h1 className="home-hero__brand" id="home-brand">
+            Detailing Nitra
+          </h1>
+          <p className="home-hero__tagline">Čistota, ktorá sa ukáže</p>
+          <p className="hero-copy">
+            Profesionálne umývanie a detailing v Nitre — rezervujte si termín online.
+          </p>
           <div className="hero-actions">
             <Link className="button-primary" to="/book">
               Rezervujte si termín
@@ -138,6 +145,7 @@ function HomePage() {
       <section className="home-section">
         <div className="section-heading section-heading--centered">
           <h2>Výsledky našej poctivej práce</h2>
+          <p>Pred a po — kliknite pre zväčšenie.</p>
         </div>
         <div className="showcase-grid">
           {showcaseItems.map((item) => (
@@ -152,7 +160,7 @@ function HomePage() {
                     })
                   }
                 >
-                  <img src={item.before} alt={`${item.title} before`} />
+                  <img src={item.before} alt={`${item.title} before`} loading="lazy" />
                 </button>
                 <button
                   type="button"
@@ -163,7 +171,7 @@ function HomePage() {
                     })
                   }
                 >
-                  <img src={item.after} alt={`${item.title} after`} />
+                  <img src={item.after} alt={`${item.title} after`} loading="lazy" />
                 </button>
               </div>
             </article>
@@ -171,7 +179,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="text-us-section">
+      <section className="text-us-section" id="contact">
         <div className="section-heading">
           <p className="eyebrow">Potrebujete pomoc s výberom?</p>
           <h2>Kontaktujte nás</h2>

@@ -8,28 +8,50 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  border-radius: 6px;
-  padding: 0 18px;
+  min-height: 48px;
+  border-radius: 8px;
+  padding: 0 22px;
   font-weight: 700;
   text-decoration: none;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .button-primary {
   color: #fff;
   background: var(--accent);
+  box-shadow: 0 8px 20px -10px rgba(0, 180, 216, 0.7);
+}
+
+.button-primary:hover {
+  background: #0096c7;
+  transform: translateY(-1px);
 }
 
 .button-secondary {
   color: var(--text-h);
   background: var(--social-bg);
+  border: 1px solid var(--border);
+}
+
+.button-secondary:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  transform: translateY(-1px);
 }
 
 .service-card {
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 22px;
   text-align: left;
+  background: color-mix(in srgb, var(--bg-accent) 70%, transparent);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
 }
 
 .service-card--clickable {

@@ -31,6 +31,9 @@ function Navbar() {
 
   return (
     <header className="site-header">
+      <NavLink className="site-logo" to="/">
+        Detailing Nitra
+      </NavLink>
       <nav className="site-nav" aria-label="Main navigation">
         <NavLink to="/">Domov</NavLink>
         <NavLink to="/services">Služby</NavLink>
